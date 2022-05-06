@@ -14,24 +14,15 @@
 
 #include "mrv1a_hardware/mrv1aPositionHI.hpp"
 
-#include <chrono>
-#include <cmath>
-#include <limits>
-#include <memory>
-#include <vector>
-
-#include "hardware_interface/types/hardware_interface_type_values.hpp"
-#include "rclcpp/rclcpp.hpp"
-
 namespace mrv1a_hardware
 {
   // ------------------------------------------------------------------------------------------
-hardware_interface::return_type Mrv1aPositionHardwareInterface::configure(
+CallbackReturn Mrv1aPositionHardwareInterface::on_init(
   const hardware_interface::HardwareInfo & info)
 {
-  if (configure_default(info) != hardware_interface::return_type::OK)
+  if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS)
   {
-    return hardware_interface::return_type::ERROR;
+    return CallbackReturn::ERROR;
   }
 
   hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
@@ -46,7 +37,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::configure(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "Joint '%s' has %d command interfaces found. 1 expected.", joint.name.c_str(),
         joint.command_interfaces.size());
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
 
     if (joint.command_interfaces[0].name != hardware_interface::HW_IF_POSITION)
@@ -55,7 +46,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::configure(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
         joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
 
     if (joint.state_interfaces.size() != 1)
@@ -64,7 +55,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::configure(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "Joint '%s' has %d state interface. 1 expected.", joint.name.c_str(),
         joint.state_interfaces.size());
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
 
     if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION)
@@ -73,12 +64,11 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::configure(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "Joint '%s' have %s state interface. '%s' expected.", joint.name.c_str(),
         joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
     }
   }
 
-  status_ = hardware_interface::status::CONFIGURED;
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
   // ------------------------------------------------------------------------------------------
 std::vector<hardware_interface::StateInterface>
@@ -107,15 +97,12 @@ Mrv1aPositionHardwareInterface::export_command_interfaces()
   return command_interfaces;
 }
   // ------------------------------------------------------------------------------------------
-hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
+CallbackReturn Mrv1aPositionHardwareInterface::on_activate(const rclcpp_lifecycle::State & previous_state)
 {
   RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Starting ...please wait...");
 
   std::string p_ip  = info_.hardware_parameters["robot_ip"];
   int p_port = stoi(info_.hardware_parameters["robot_port"]);
-
-  RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"),"Connecting to port= %i and ip= "+ p_ip, p_port);
-
 
   // IP address, port, etc., setting
   memset(&destSockAddr_, 0, sizeof(destSockAddr_));
@@ -131,7 +118,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
       RCLCPP_FATAL(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "ERROR: socket unsuccessful");
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
   }
 
   struct timeval tv;
@@ -141,7 +128,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
       RCLCPP_FATAL(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "ERROR: setsockopt unsuccessful : %i ", err);
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
   }
 
   memset(&MXTsend_, 0, sizeof(MXTsend_));
@@ -162,14 +149,14 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
       RCLCPP_FATAL(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "ERROR: sendto unsuccessful in first send.");
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
   }
   socket_status_=recvfrom(destSocket_, (char *) &MXTrecv_, MAXBUFLEN, NO_FLAGS_SET, NULL ,NULL);
   if (socket_status_ == SOCKET_ERROR) {
       RCLCPP_FATAL(
         rclcpp::get_logger("Mrv1aPositionHardwareInterface"),
         "ERROR: recvfrom unsuccessful in first recv.");
-      return hardware_interface::return_type::ERROR;
+      return CallbackReturn::ERROR;
   }
 
   hw_states_[0]=MXTrecv_.dat.jnt.j1;
@@ -179,36 +166,26 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
   hw_states_[4]=MXTrecv_.dat.jnt.j5;
   hw_states_[5]=MXTrecv_.dat.jnt.j6;
 
-    // std::cout << "GOT JOINT " << hw_states_[0] <<", " << hw_states_[1] <<", " << hw_states_[2] <<", " << hw_states_[3] <<", " << hw_states_[4] <<", " << hw_states_[5]  << std::endl;
-
   hw_commands_ = hw_states_;
-
-  status_ = hardware_interface::status::STARTED;
 
   RCLCPP_INFO(
     rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "System Successfully started!");
 
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type Mrv1aPositionHardwareInterface::stop()
+CallbackReturn Mrv1aPositionHardwareInterface::on_deactivate(const rclcpp_lifecycle::State & previous_state)
 {
   RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Stopping ...please wait...");
-
-  // TODO stopping routine
-
-  status_ = hardware_interface::status::STOPPED;
 
   RCLCPP_INFO(
     rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "System successfully stopped!");
 
-  return hardware_interface::return_type::OK;
+  return CallbackReturn::SUCCESS;
 }
   // ------------------------------------------------------------------------------------------
 hardware_interface::return_type Mrv1aPositionHardwareInterface::read()
 {
-  // RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Reading...");
-
   memset(&MXTrecv_, 0, sizeof(MXTrecv_));
         socket_status_=recvfrom(destSocket_, (char *) &MXTrecv_, MAXBUFLEN, NO_FLAGS_SET, NULL ,NULL);
 
@@ -224,19 +201,11 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::read()
   hw_states_[4]=MXTrecv_.dat.jnt.j5;
   hw_states_[5]=MXTrecv_.dat.jnt.j6;
 
-  // hw_states_ = debug_states_;
-
-
- 
-  // RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Joints successfully read!");
-
   return hardware_interface::return_type::OK;
 }
   // ------------------------------------------------------------------------------------------
 hardware_interface::return_type Mrv1aPositionHardwareInterface::write()
 {
-  // RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Writing...");
-
   counter_++;
 
   memset(&MXTsend_, 0, sizeof(MXTsend_));
@@ -247,7 +216,6 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::write()
   MXTsend_.SendType = MXT_TYP_JOINT;
   MXTsend_.RecvType = MXT_TYP_JOINT;
 
-  // std::cout << "SEND JOINT " << hw_commands_[0] <<", " << hw_commands_[1] <<", " << hw_commands_[2] <<", " << hw_commands_[3] <<", " << hw_commands_[4] <<", " << hw_commands_[5]  << std::endl;
   MXTsend_.dat.jnt.j1 = (float)hw_commands_[0];
   MXTsend_.dat.jnt.j2 = (float)hw_commands_[1];
   MXTsend_.dat.jnt.j3 = (float)hw_commands_[2];
@@ -262,17 +230,11 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::write()
   MXTsend_.IoData = 0;
   MXTsend_.CCount = counter_;
 
-  // debug_states_ = hw_commands_;
-
   socket_status_=sendto(destSocket_, (char *) &MXTsend_, sizeof(MXTCMD), NO_FLAGS_SET, (struct sockaddr *) &destSockAddr_, sizeof(destSockAddr_));
   if (socket_status_ != sizeof(MXTCMD)) {
       std::cerr<<"ERROR: sendto unsuccessful" <<std::endl;
       return hardware_interface::return_type::ERROR;
   }
-
- 
-  // RCLCPP_INFO(
-  //   rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Joints successfully written!");
 
   return hardware_interface::return_type::OK;
 }
