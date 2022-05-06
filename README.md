@@ -16,10 +16,10 @@ This stack includes `ros2_control` drivers for the Mitsubishi RV1A robotic manip
 ## Getting Started
 ***Required setup : Ubuntu 20.04 LTS***
 
-1.  Install `ros2` packages. The current developpment is based of `ros2 foxy`. Installation steps are decribed [here](https://docs.ros.org/en/foxy/Installation.html).
+1.  Install `ros2` packages. The current developpment is based of `ros2 galactic`. Installation steps are decribed [here](https://docs.ros.org/en/galactic/Installation.html).
 2. Source your `ros2` environment:
     ```shell
-    source /opt/ros/foxy/setup.bash
+    source /opt/ros/galactic/setup.bash
     ```
     **NOTE**: The ros2 environment needs to be sources in every used terminal. If only one distribution of ros2 is used, it can be added to the `~/.bashrc` file.
 3. Install `colcon` and its extensions :
