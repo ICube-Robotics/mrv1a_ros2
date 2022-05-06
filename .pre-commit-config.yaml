@@ -100,7 +100,7 @@ repos:
         stages: [commit]
         entry: ament_copyright
         language: system
-        exclude: libFRI/
+
   # Docs - RestructuredText hooks
   # - repo: https://github.com/PyCQA/doc8
   #   rev: 0.9.0a1

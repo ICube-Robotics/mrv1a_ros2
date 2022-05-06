@@ -140,7 +140,7 @@ CallbackReturn Mrv1aPositionHardwareInterface::on_activate(const rclcpp_lifecycl
   MXTsend_.SendIOType = MXT_IO_NULL;
   MXTsend_.RecvIOType = MXT_IO_NULL;
 
-  
+
   counter_++;  // Count up only when communication is successful
   MXTsend_.CCount = counter_;
 

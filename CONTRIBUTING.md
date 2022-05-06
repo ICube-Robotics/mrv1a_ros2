@@ -1,5 +1,5 @@
 # Contributing Guidelines
-Thank you for your interest in contributing to `mrv1a_ros2`. Whether it's a bug report, new feature, correction, or additional documentation, we greatly value feedback and contributions from the community.
+Thank you for your interest in contributing to `forcedimension_ros2`. Whether it's a bug report, new feature, correction, or additional documentation, we greatly value feedback and contributions from the community.
 
 Please read through this document before submitting any issues or pull requests to ensure we have all the necessary information to effectively respond to your bug report or contribution.
 

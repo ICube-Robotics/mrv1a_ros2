@@ -30,17 +30,17 @@
                 <command_interface name="position" >
                     <param name="min">-2.62</param>
                     <param name="max">2.62</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
-            </joint> 
+            </joint>
 
             <joint name="${prefix}joint_a2">
                 <param name="initial_position">${initial_positions['joint_a2']}</param>
                 <command_interface name="position" >
                     <param name="min">-1.05</param>
                     <param name="max">2.0942</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
             </joint>
@@ -49,7 +49,7 @@
                 <command_interface name="position" >
                     <param name="min">1.05</param>
                     <param name="max">2.71</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
             </joint>
@@ -58,7 +58,7 @@
                 <command_interface name="position" >
                     <param name="min">-2.79</param>
                     <param name="max">2.79</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
             </joint>
@@ -66,7 +66,7 @@
                 <command_interface name="position" >
                     <param name="min">-1.57</param>
                     <param name="max">1.57</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
             </joint>
@@ -75,7 +75,7 @@
                 <command_interface name="position" >
                     <param name="min">-3.49</param>
                     <param name="max">3.49</param>
-                </command_interface>   
+                </command_interface>
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
             </joint>
