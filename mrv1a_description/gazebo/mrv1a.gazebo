@@ -9,5 +9,5 @@
       <parameters>$(find mrv1a_description)/config/mrv1a_controllers.yaml</parameters>
     </plugin>
   </gazebo>
-  
+
 </robot>

@@ -66,7 +66,7 @@ public:
 
 private:
 
-  // Communication 
+  // Communication
   sockaddr_in destSockAddr_;
   SOCKET destSocket_;
   MXTCMD MXTsend_, MXTrecv_;

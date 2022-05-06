@@ -4,7 +4,7 @@
   <xacro:macro name="mrv1a" params="parent prefix *origin">
 
     <material name="gray">
-      <color rgba="0.5 0.5 0.5 1.0"/> 
+      <color rgba="0.5 0.5 0.5 1.0"/>
     </material>
     <link name="${prefix}mrv1a_base" type="fixed"/>
 

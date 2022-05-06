@@ -17,7 +17,7 @@
   <depend>rclcpp_lifecycle</depend>
   <depend>ros2_control</depend>
   <depend>ros2_controllers</depend>
-  
+
   <exec_depend>mrv1a_description</exec_depend>
   <exec_depend>mrv1a_bringup</exec_depend>
 

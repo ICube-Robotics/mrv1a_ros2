@@ -153,7 +153,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::start()
   MXTsend_.SendIOType = MXT_IO_NULL;
   MXTsend_.RecvIOType = MXT_IO_NULL;
 
-  
+
   counter_++;  // Count up only when communication is successful
   MXTsend_.CCount = counter_;
 
@@ -227,7 +227,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::read()
   // hw_states_ = debug_states_;
 
 
- 
+
   // RCLCPP_INFO(rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Joints successfully read!");
 
   return hardware_interface::return_type::OK;
@@ -270,7 +270,7 @@ hardware_interface::return_type Mrv1aPositionHardwareInterface::write()
       return hardware_interface::return_type::ERROR;
   }
 
- 
+
   // RCLCPP_INFO(
   //   rclcpp::get_logger("Mrv1aPositionHardwareInterface"), "Joints successfully written!");
 
