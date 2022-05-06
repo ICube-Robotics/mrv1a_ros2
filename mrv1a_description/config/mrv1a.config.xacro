@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mrv1a">
+    <xacro:arg name="initial_positions_file" default="$(find mrv1a_description)/config/initial_positions.yaml" />
+
+    <!-- Import mrv1a urdf file -->
+    <xacro:include filename="$(find mrv1a_description)/urdf/mrv1a.urdf.xacro" />
+
+    <!-- Import mrv1a ros2_control description -->
+    <xacro:include filename="$(find mrv1a_description)/ros2_control/mrv1a.r2c_hardware.xacro" />
+
+    <!-- Import all Gazebo-customization elements -->
+    <xacro:include filename="$(find mrv1a_description)/gazebo/mrv1a.gazebo"/>
+
+    <!-- Used for fixing robot -->
+    <link name="world"/>
+    <gazebo reference="world">
+        <static>true</static>
+    </gazebo>
+
+    <xacro:mrv1a parent="world" prefix="$(arg prefix)">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:mrv1a>
+
+    <xacro:mrv1a_r2c_hardware 
+        name="mrv1aRobot" prefix="$(arg prefix)"
+        robot_ip="$(arg robot_ip)" robot_port="$(arg robot_port)"
+        initial_positions_file="$(arg initial_positions_file)" 
+        use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)"
+        />
+</robot>

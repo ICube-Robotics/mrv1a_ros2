@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="mrv1a" params="parent prefix *origin">
+
+    <material name="gray">
+      <color rgba="0.5 0.5 0.5 1.0"/> 
+    </material>
+    <link name="${prefix}mrv1a_base" type="fixed"/>
+
+    <joint name="${prefix}mrv1a_base" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}mrv1a_base"/>
+    </joint>
+
+    <link name="${prefix}mrv1a_base">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_0.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_0.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_1">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_1.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_1.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_2">
+        <visual>
+          <origin rpy="0 0 -1.57" xyz="0 -0.25 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_2.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 -1.57" xyz="0 -0.25 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_2.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_3">
+        <visual>
+          <origin rpy="1.57 0 0" xyz="-0.09 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_3.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="1.57 0 0" xyz="-0.09 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_3.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_4">
+        <visual>
+          <origin rpy="-1.57 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_4.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_4.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_5">
+        <visual>
+          <origin rpy="1.57 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_5.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_5.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}link_6">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_6.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="gray"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://mrv1a_description/meshes/body1_6.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+    <link name="${prefix}tool0">
+      <inertial>
+          <mass value="1"/>
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+        </inertial>
+    </link>
+
+    <joint name="${prefix}joint_a1" type="revolute">
+        <origin rpy="-1.57 0 0" xyz="0 0 0.3"/>
+        <parent link="${prefix}mrv1a_base"/>
+        <child link="${prefix}link_1"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="1000" lower="-2.62" upper="2.62" velocity="3.14"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a2" type="revolute">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="${prefix}link_1"/>
+        <child link="${prefix}link_2"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="-1.05" upper="2.0942" velocity="1.57"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a3" type="revolute">
+        <origin rpy="0 0 0" xyz="0 -0.25 0"/>
+        <parent link="${prefix}link_2"/>
+        <child link="${prefix}link_3"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="1.05" upper="2.71" velocity="2.36"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a4" type="revolute">
+        <origin rpy="1.57 0 0" xyz="-0.09 -0.16 0"/>
+        <parent link="${prefix}link_3"/>
+        <child link="${prefix}link_4"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="-2.79" upper="2.79" velocity="3.14"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a5" type="revolute">
+        <origin rpy="-1.57 0 0" xyz="0 0 0"/>
+        <parent link="${prefix}link_4"/>
+        <child link="${prefix}link_5"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="-1.57" upper="1.57" velocity="3.14"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a6" type="revolute">
+        <origin rpy="1.57 0 0" xyz="0 -0.072 0"/>
+        <parent link="${prefix}link_5"/>
+        <child link="${prefix}link_6"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="1000" lower="-3.49" upper="3.49" velocity="3.67"/>
+        <dynamics damping="0.0" friction="0.0"/>
+    </joint>
+    <joint name="${prefix}joint_a6-tool0" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="${prefix}link_6"/>
+        <child link="${prefix}tool0"/>
+    </joint>
+
+  </xacro:macro>
+</robot>

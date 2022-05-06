@@ -1,0 +1,9 @@
+<library path="mrv1a_hardware">
+    <class name="mrv1a_hardware/Mrv1aPositionHardwareInterface"
+            type="mrv1a_hardware::Mrv1aPositionHardwareInterface"
+            base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware for MRV1a joint-space position control.
+        </description>
+    </class>
+</library>

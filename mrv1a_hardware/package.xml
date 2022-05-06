@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>mrv1a_hardware</name>
+  <version>0.0.0</version>
+  <description> Package for `ros2_control` Hardware for Mitsubishi RV1A robot.</description>
+
+  <maintainer email="m.bednarczyk@unistra.fr">m.bednarczyk</maintainer>
+
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>hardware_interface</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  
+  <exec_depend>mrv1a_description</exec_depend>
+  <exec_depend>mrv1a_bringup</exec_depend>
+
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
