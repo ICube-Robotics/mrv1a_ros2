@@ -1,4 +1,6 @@
 # mrv1a_ros2 #
+[![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build](https://github.com/ICube-Robotics/mrv1a_ros2/actions/workflows/build.yaml/badge.svg)](https://github.com/ICube-Robotics/mrv1a_ros2/actions/workflows/build.yaml)
 
 This stack includes `ros2_control` drivers for the Mitsubishi RV1A robotic manipulator.
 
