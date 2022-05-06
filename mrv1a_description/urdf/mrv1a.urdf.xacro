@@ -6,13 +6,6 @@
     <material name="gray">
       <color rgba="0.5 0.5 0.5 1.0"/>
     </material>
-    <link name="${prefix}mrv1a_base" type="fixed"/>
-
-    <joint name="${prefix}mrv1a_base" type="fixed">
-        <xacro:insert_block name="origin" />
-        <parent link="${parent}"/>
-        <child link="${prefix}mrv1a_base"/>
-    </joint>
 
     <link name="${prefix}mrv1a_base">
         <visual>
@@ -153,6 +146,12 @@
           <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
         </inertial>
     </link>
+
+    <joint name="${prefix}mrv1a_base" type="fixed">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}"/>
+        <child link="${prefix}mrv1a_base"/>
+    </joint>
 
     <joint name="${prefix}joint_a1" type="revolute">
         <origin rpy="-1.57 0 0" xyz="0 0 0.3"/>
