@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mrv1a">
-    <xacro:arg name="initial_positions_file" default="$(find mrv1a_description)/config/initial_positions.yaml" />
-
+    
+    <!-- Enable setting arguments from the launch file -->
+    <xacro:arg name="use_sim" default="false" />
+    <xacro:arg name="use_fake_hardware" default="true" />
+    <xacro:arg name="prefix" default="" />
+    <xacro:arg name="robot_ip" default="192.168.122.200" />
+    <xacro:arg name="robot_port" default="10000" />
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    
     <!-- Import mrv1a urdf file -->
     <xacro:include filename="$(find mrv1a_description)/urdf/mrv1a.urdf.xacro" />
 
